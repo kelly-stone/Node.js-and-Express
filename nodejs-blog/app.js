@@ -1,5 +1,17 @@
 const express = require("express");
 const path = require("path");
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost/nodejs-blog"); //to find out the localhost on command line type mongo then show db
+let db = mongoose.connection;
+
+db.once("open", function() {
+  console.log("connected to Mongodb");
+});
+
+db.on("error", function(err) {
+  console.log(err);
+});
 
 const app = express();
 
