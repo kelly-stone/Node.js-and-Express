@@ -22,6 +22,7 @@ app.set("view engine", "pug");
 
 app.get("/", function(req, res) {
   Article.find({}, function(err, articles) {
+    //collection is articles, but here first letter is capital and no s"
     res.render("index", {
       articles: articles
     });
