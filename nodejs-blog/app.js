@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 mongoose.connect("mongodb://localhost/nodejs-blog"); //to find out the localhost on command line type mongo then show db
 let db = mongoose.connection;
@@ -31,8 +32,14 @@ app.get("/", function(req, res) {
 
 app.get("/articles/new", function(req, res) {
   res.render("new", {
+    //new.pug
     title: "Add Article"
   });
+});
+
+app.post("/articles/create", function(req, res) {
+  console.log("ok");
+  return;
 });
 
 app.listen(5000, function() {
