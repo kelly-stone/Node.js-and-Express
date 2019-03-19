@@ -3,11 +3,11 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-mongoose.connect("mongodb://localhost/nodejs-blog");
+mongoose.connect("mongodb://localhost/nodejs-blog"); //to find out the localhost on command line type mongo then show db
 let db = mongoose.connection;
 
 db.once("open", function() {
-  console.log("Connected to Mongodb");
+  console.log("connected to Mongodb");
 });
 
 db.on("error", function(err) {
@@ -18,6 +18,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(express.static(path.join(__dirname, "public")));
+
 let Article = require("./models/article");
 
 app.set("views", path.join(__dirname, "views"));
@@ -25,6 +27,7 @@ app.set("view engine", "pug");
 
 app.get("/", function(req, res) {
   Article.find({}, function(err, articles) {
+    //collection is articles, but here first letter is capital and no s"
     res.render("index", {
       articles: articles
     });
@@ -33,12 +36,19 @@ app.get("/", function(req, res) {
 
 app.get("/articles/new", function(req, res) {
   res.render("new", {
+    //new.pug
     title: "Add Article"
   });
 });
 
 app.post("/articles/create", function(req, res) {
-  let article = new Article(req.body);
+  //console.log("ok");
+  //return;
+  let article = new Article();
+
+  article.title = req.body.title;
+  article.author = req.body.author;
+  article.body = req.body.body;
 
   article.save(function(err) {
     if (err) {
@@ -51,5 +61,5 @@ app.post("/articles/create", function(req, res) {
 });
 
 app.listen(5000, function() {
-  console.log("Server started on port 5000...");
+  console.log("server started on port 5000...");
 });
