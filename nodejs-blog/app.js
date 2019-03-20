@@ -36,6 +36,7 @@ app.get("/", function(req, res) {
 
 app.get("/articles/new", function(req, res) {
   res.render("new", {
+    //form new.pug
     //new.pug
     title: "Add Article"
   });
