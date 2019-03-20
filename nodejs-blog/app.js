@@ -41,6 +41,13 @@ app.get("/articles/new", function(req, res) {
   });
 });
 
+app.get("/articles/:id", function(req, res) {
+  Article.findById(req.params.id, function(err, article) {
+    console.log(article);
+    return;
+  });
+});
+
 app.post("/articles/create", function(req, res) {
   //console.log("ok");
   //return;
