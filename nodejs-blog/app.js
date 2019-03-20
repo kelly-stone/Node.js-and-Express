@@ -43,8 +43,11 @@ app.get("/articles/new", function(req, res) {
 
 app.get("/articles/:id", function(req, res) {
   Article.findById(req.params.id, function(err, article) {
-    console.log(article);
-    return;
+    // console.log(article);
+    // return;
+    res.render("show", {
+      article: article
+    });
   });
 });
 
