@@ -59,7 +59,7 @@ app.get("/articles/:id/edit", function(req, res) {
       article: article
     });
   });
-});
+}); //article edit then update
 
 app.post("/articles/create", function(req, res) {
   //console.log("ok");
