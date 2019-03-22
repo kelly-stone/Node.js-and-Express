@@ -80,6 +80,19 @@ app.post("/articles/create", function(req, res) {
   });
 });
 
+app.post("/articles/update/:id", function(req, res) {
+  let query = { _id: req.params.id };
+
+  Article.update(query, req.body, function(err) {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      res.redirect("/");
+    }
+  });
+});
+
 app.listen(5000, function() {
   console.log("server started on port 5000...");
 });
