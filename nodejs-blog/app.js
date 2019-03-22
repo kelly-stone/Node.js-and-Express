@@ -52,6 +52,14 @@ app.get("/articles/:id", function(req, res) {
   });
 });
 
+app.get("/articles/:id/edit", function(req, res) {
+  Article.findById(req.params.id, function(err, article) {
+    res.render("edit", {
+      article: article
+    });
+  });
+});
+
 app.post("/articles/create", function(req, res) {
   //console.log("ok");
   //return;
