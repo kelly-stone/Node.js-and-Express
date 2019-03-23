@@ -55,7 +55,7 @@ app.get("/articles/:id", function(req, res) {
 app.get("/articles/:id/edit", function(req, res) {
   Article.findById(req.params.id, function(err, article) {
     res.render("edit", {
-      title: "Edit Article", //edit.pug#{title}
+      title: "Edit Article", //edit.pug #{title}
       article: article
     });
   });
