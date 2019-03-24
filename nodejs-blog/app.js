@@ -93,6 +93,17 @@ app.post("/articles/update/:id", function(req, res) {
   });
 });
 
+app.delete("/articles/:id", function(req, res) {
+  let query = { _id: req.params.id };
+
+  Article.remove(query, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    res.send("success");
+  });
+});
+
 app.listen(5000, function() {
   console.log("server started on port 5000...");
 });
