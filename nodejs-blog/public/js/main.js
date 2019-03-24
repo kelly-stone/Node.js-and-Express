@@ -5,7 +5,7 @@ $(document).ready(function() {
     //console.log($target.attr("data-id"));
     var id = $target.attr("data-id");
     $.ajax({
-      type: "DELETE",
+      type: "DELETE", //dont forget ","
       url: "/articles/" + id,
       success: function() {
         alert("Deleting Article");
