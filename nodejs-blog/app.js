@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+var session = require("express-session");
 
 mongoose.connect("mongodb://localhost/nodejs-blog"); //to find out the localhost on command line type mongo then show db
 let db = mongoose.connection;
@@ -15,6 +16,14 @@ db.on("error", function(err) {
 });
 
 const app = express();
+
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true
+  })
+); //https://github.com/expressjs/session
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
