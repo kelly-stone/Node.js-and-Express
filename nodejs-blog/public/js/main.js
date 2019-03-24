@@ -4,5 +4,16 @@ $(document).ready(function() {
     var $target = $(e.target);
     //console.log($target.attr("data-id"));
     var id = $target.attr("data-id");
+    $.ajax({
+      type: "DELETE",
+      url: "/article/" + id,
+      success: function() {
+        alert("Deleting Article");
+        window.location.href = "/";
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
   });
 });
