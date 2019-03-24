@@ -100,7 +100,7 @@ app.delete("/articles/:id", function(req, res) {
     if (err) {
       console.log(err);
     }
-    res.send("success");
+    res.send("success"); //when success, it will run main.js success "/"
   });
 });
 
