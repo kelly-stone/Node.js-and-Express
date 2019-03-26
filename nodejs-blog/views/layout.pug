@@ -20,6 +20,7 @@ html(lang="en")
               a.nav-link(href='/articles/new') Add Article
 
     .container
+      //- != messages('message', locals)
       block content
       br
       hr
