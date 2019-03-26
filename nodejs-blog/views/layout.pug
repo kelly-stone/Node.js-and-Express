@@ -20,7 +20,7 @@ html(lang="en")
               a.nav-link(href='/articles/new') Add Article
 
     .container
-      //- != messages('message', locals)
+      != messages('message', locals) // copy from https://github.com/visionmedia/express-messages Call the message template, Jade
       block content
       br
       hr
