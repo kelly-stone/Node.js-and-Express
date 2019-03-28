@@ -90,7 +90,7 @@ app.post("/articles/create", function(req, res) {
       console.log(err);
       return;
     } else {
-      req.flash("success", "Article Added");
+      req.flash("success", "Article Added"); //once success, show "Article Added"
       res.redirect("/");
     }
   });
