@@ -1,8 +1,4 @@
 .messages
   each type in Object.keys(messages)
-    //- ul(class="#{type}")
-    //-   each message in messages[type]
-        //- li= message
     each message in messages[type]
-    //-  bootstrap
-        div(class="alert alert-" + type) #{message}
+      div(class="alert alert-" + type) #{message}
