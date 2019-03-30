@@ -90,7 +90,7 @@ app.post("/articles/create", function(req, res) {
       console.log(err);
       return;
     } else {
-      req.flash("success", "Article Added"); //once success, show "Article Added"
+      req.flash("success", "Article Added"); //once success, show "Article Added",https://github.com/visionmedia/express-messages
       res.redirect("/");
     }
   });
