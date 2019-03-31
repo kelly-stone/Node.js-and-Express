@@ -104,6 +104,7 @@ app.post("/articles/update/:id", function(req, res) {
       console.log(err);
       return;
     } else {
+      req.flash("success", "Article updated"); //once success, show "Article updated",https://github.com/visionmedia/express-messages
       res.redirect("/");
     }
   });
