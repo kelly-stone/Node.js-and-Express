@@ -117,6 +117,8 @@ app.delete("/articles/:id", function(req, res) {
     if (err) {
       console.log(err);
     }
+    req.flash("success", "Article Deleted"); //once success, show "Article Added",https://github.com/visionmedia/express-messages
+
     res.send("success"); //when success, it will run main.js success "/"
   });
 });
