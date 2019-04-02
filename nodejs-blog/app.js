@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var session = require("express-session");
 
+const { check, validationResult } = require("express-validator/check");
+
 mongoose.connect("mongodb://localhost/nodejs-blog"); //to find out the localhost on command line type mongo then show db
 let db = mongoose.connection;
 
@@ -76,25 +78,35 @@ app.get("/articles/:id/edit", function(req, res) {
   });
 }); //article edit then update
 
-app.post("/articles/create", function(req, res) {
-  //console.log("ok");
-  //return;
-  let article = new Article();
-
-  article.title = req.body.title;
-  article.author = req.body.author;
-  article.body = req.body.body;
-
-  article.save(function(err) {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
-      req.flash("success", "Article Added"); //once success, show "Article Added",https://github.com/visionmedia/express-messages
-      res.redirect("/");
+app.post(
+  "/articles/create",
+  [check("title").isEmail()], //www.express-validator.github.io/docs/index.html
+  function(req, res) {
+    //www.express-validator.github.io/docs/index.html
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors.array());
     }
-  });
-});
+    return;
+    //console.log("ok");
+    //return;
+    let article = new Article();
+
+    article.title = req.body.title;
+    article.author = req.body.author;
+    article.body = req.body.body;
+
+    article.save(function(err) {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        req.flash("success", "Article Added"); //once success, show "Article Added",https://github.com/visionmedia/express-messages
+        res.redirect("/");
+      }
+    });
+  }
+);
 
 app.post("/articles/update/:id", function(req, res) {
   let query = { _id: req.params.id };
@@ -118,7 +130,6 @@ app.delete("/articles/:id", function(req, res) {
       console.log(err);
     }
     req.flash("success", "Article Deleted"); //once success, show "Article Added",https://github.com/visionmedia/express-messages
-
     res.send("success"); //when success, it will run main.js success "/"
   });
 });
