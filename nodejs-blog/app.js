@@ -44,7 +44,7 @@ app.set("view engine", "pug");
 
 let articles = require("./routes/articles");
 
-app.use("/articles", articles);
+app.use("/articles", articles); //routes/articles.js
 
 app.listen(5000, function() {
   console.log("server started on port 5000...");
