@@ -11,7 +11,7 @@ router.get("/", function(req, res) {
   });
 });
 
-router.get("/articles/new", function(req, res) {
+router.get("/new", function(req, res) {
   res.render("new", {
     //form new.pug
     //new.pug
@@ -19,7 +19,7 @@ router.get("/articles/new", function(req, res) {
   });
 });
 
-router.get("/articles/:id", function(req, res) {
+router.get("/:id", function(req, res) {
   Article.findById(req.params.id, function(err, article) {
     // console.log(article);
     // return;
@@ -29,7 +29,7 @@ router.get("/articles/:id", function(req, res) {
   });
 });
 
-router.get("/articles/:id/edit", function(req, res) {
+router.get("/:id/edit", function(req, res) {
   Article.findById(req.params.id, function(err, article) {
     res.render("edit", {
       title: "Edit Article", //edit.pug #{title}
@@ -39,7 +39,7 @@ router.get("/articles/:id/edit", function(req, res) {
 }); //article edit then update
 
 router.post(
-  "/articles/create",
+  "/create",
   [check("title").isEmail()], //www.express-validator.github.io/docs/index.html
   function(req, res) {
     //www.express-validator.github.io/docs/index.html
@@ -68,7 +68,7 @@ router.post(
   }
 );
 
-router.post("/articles/update/:id", function(req, res) {
+router.post("/update/:id", function(req, res) {
   let query = { _id: req.params.id };
 
   Article.update(query, req.body, function(err) {
@@ -82,7 +82,7 @@ router.post("/articles/update/:id", function(req, res) {
   });
 });
 
-router.delete("/articles/:id", function(req, res) {
+router.delete("/:id", function(req, res) {
   let query = { _id: req.params.id };
 
   Article.remove(query, function(err) {
