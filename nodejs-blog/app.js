@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var session = require("express-session");
 
-const { check, validationResult } = require("express-validator/check");
-
 mongoose.connect("mongodb://localhost/nodejs-blog"); //to find out the localhost on command line type mongo then show db
 let db = mongoose.connection;
 
@@ -38,6 +36,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 let Article = require("./models/article");
+
+app.get("/", function(req, res) {
+  Article.find({}, function(err, articles) {
+    res.render("articles/index", {
+      articles: articles
+    });
+  });
+});
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");

@@ -1,18 +1,21 @@
-import express from "express";
+const express = require("express");
+const { check, validationResult } = require("express-validator/check");
 
 let router = express.Router();
+
+let Article = require("../models/article");
 
 router.get("/", function(req, res) {
   Article.find({}, function(err, articles) {
     //collection is articles, but here first letter is capital and no s"
-    res.render("index", {
+    res.render("articles/index", {
       articles: articles
     });
   });
 });
 
 router.get("/new", function(req, res) {
-  res.render("new", {
+  res.render("articles/new", {
     //form new.pug
     //new.pug
     title: "Add Article"
@@ -23,7 +26,7 @@ router.get("/:id", function(req, res) {
   Article.findById(req.params.id, function(err, article) {
     // console.log(article);
     // return;
-    res.render("show", {
+    res.render("articles/show", {
       article: article
     });
   });
@@ -31,7 +34,7 @@ router.get("/:id", function(req, res) {
 
 router.get("/:id/edit", function(req, res) {
   Article.findById(req.params.id, function(err, article) {
-    res.render("edit", {
+    res.render("articles/edit", {
       title: "Edit Article", //edit.pug #{title}
       article: article
     });
@@ -94,4 +97,4 @@ router.delete("/:id", function(req, res) {
   });
 });
 
-export default router;
+module.exports = router;
