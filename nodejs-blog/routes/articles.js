@@ -43,31 +43,38 @@ router.get("/:id/edit", function(req, res) {
 
 router.post(
   "/create",
-  [check("title").isEmail()], //www.express-validator.github.io/docs/index.html
+  [
+    check("title")
+      .isLength({ min: 1 })
+      .withMessage("Title is required"),
+    check("body")
+      .isLength({ min: 1 })
+      .withMessage("Body is required"),
+    check("author")
+      .isLength({ min: 1 })
+      .withMessage("Author is required")
+  ],
   function(req, res) {
-    //www.express-validator.github.io/docs/index.html
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
-      console.log(errors.array());
+      res.render("articles/new", {
+        title: "Add Article",
+        errors: errors.array()
+      });
+    } else {
+      let article = new Article(req.body);
+
+      article.save(function(err) {
+        if (err) {
+          console.log(err);
+          return;
+        } else {
+          req.flash("success", "Article Added");
+          res.redirect("/");
+        }
+      });
     }
-    return;
-    //console.log("ok");
-    //return;
-    let article = new Article();
-
-    article.title = req.body.title;
-    article.author = req.body.author;
-    article.body = req.body.body;
-
-    article.save(function(err) {
-      if (err) {
-        console.log(err);
-        return;
-      } else {
-        req.flash("success", "Article Added"); //once success, show "Article Added",https://github.com/visionmedia/express-messages
-        res.redirect("/");
-      }
-    });
   }
 );
 
