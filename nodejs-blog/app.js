@@ -37,20 +37,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 let Article = require("./models/article");
 
-app.get("/", function(req, res) {
-  Article.find({}, function(err, articles) {
-    res.render("articles/index", {
-      articles: articles
-    });
-  });
-});
-
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 let articles = require("./routes/articles");
+let users = require("./routes/users");
 
 app.use("/articles", articles); //routes/articles.js
+app.use("/users", users);
 
 app.listen(5000, function() {
   console.log("server started on port 5000...");
