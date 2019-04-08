@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var session = require("express-session");
 
-mongoose.connect("mongodb://localhost/nodejs-blog"); //to find out the localhost on command line type mongo then show db
+mongoose.connect("mongodb://localhost/nodejs-blog", { useNewUrlParser: true }); //to find out the localhost on command line type mongo then show db
 let db = mongoose.connection;
 
 db.once("open", function() {
