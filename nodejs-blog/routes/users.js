@@ -21,7 +21,7 @@ router.post(
     check("email")
       .isLength({ min: 1 })
       .withMessage("Email is required"),
-    check("email")
+    check("email") //https://github.com/chriso/validator.js/
       .isEmail()
       .withMessage("invalid email"),
     check("password", "invalid password")
