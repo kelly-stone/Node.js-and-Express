@@ -1,9 +1,9 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator/check");
 
-let User = require("../models/user");
-
 let router = express.Router();
+
+let User = require("../models/user");
 
 router.get("/register", function(req, res) {
   res.render("users/register");
