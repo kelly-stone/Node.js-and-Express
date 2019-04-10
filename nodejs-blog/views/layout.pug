@@ -1,13 +1,13 @@
 doctype html
 html(lang="en")
   head
-    title Coding Everyday
+    title Knowledgebase
     link(rel="stylesheet", href="/bower_components/bootstrap/dist/css/bootstrap.css")
     link(rel="stylesheet", href="/css/style.css")
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-2
       .container
-        a.navbar-brand(href='/') Coding Everyday
+        a.navbar-brand(href='/') Knowledgebase
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExample05', aria-controls='navbarsExample05', aria-expanded='false', aria-label='Toggle navigation')
           span.navbar-toggler-icon
         #navbarsExample05.collapse.navbar-collapse
@@ -20,7 +20,7 @@ html(lang="en")
               a.nav-link(href='/articles/new') Add Article
 
     .container
-      != messages('message', locals) 
+      != messages('message', locals)
       if errors
         each error, i in errors
           div(class="alert alert-danger") #{error.msg}
@@ -28,7 +28,7 @@ html(lang="en")
       br
       hr
       footer
-        p Copyright &copy; 2019
+        p Copyright &copy; 2018
     script(src="/bower_components/jquery/dist/jquery.js")
     script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
     script(src="/js/main.js")
