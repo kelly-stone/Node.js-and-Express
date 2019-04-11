@@ -70,4 +70,8 @@ router.post(
   }
 );
 
+router.get("/login", function(req, res) {
+  res.render("users/login");
+});
+
 module.exports = router;
