@@ -1,6 +1,6 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator/check");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt"); //https://github.com/kelektiv/node.bcrypt.js/
 
 let router = express.Router();
 
@@ -46,14 +46,25 @@ router.post(
     } else {
       let user = new User(req.body);
 
-      user.save(function(err) {
-        if (err) {
-          console.log(err);
-          return;
-        } else {
-          req.flash("success", "User Added");
-          res.redirect("/");
-        }
+      //https://github.com/kelektiv/node.bcrypt.js/
+      bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(user.password, salt, function(err, hash) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          user.password = hash;
+
+          user.save(function(err) {
+            if (err) {
+              console.log(err);
+              return;
+            } else {
+              req.flash("success", "You are now registered");
+              res.redirect("/");
+            }
+          });
+        });
       });
     }
   }
