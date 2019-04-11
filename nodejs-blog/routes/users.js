@@ -60,7 +60,7 @@ router.post(
               console.log(err);
               return;
             } else {
-              req.flash("success", "You are now registered");
+              req.flash("success", "You are now registered"); //密码成功加密
               res.redirect("/");
             }
           });
