@@ -74,6 +74,24 @@ router.get("/login", function(req, res) {
   res.render("users/login");
 });
 
-router.post("/login", function(req, res) {});
-
+router.post("/login", function(req, res) {
+  //https://github.com/jaredhanson/passport
+  //http://www.passportjs.org/docs/authenticate/
+});
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      if (!user.verifyPassword(password)) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  })
+);
 module.exports = router;
