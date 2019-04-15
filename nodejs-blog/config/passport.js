@@ -24,10 +24,21 @@ module.exports = function(passport) {
           if (isMatch) {
             return done(null, user);
           } else {
-            return done(null, false);
+            return done(null, false, { message: "Incorrect password." });
           }
         });
       });
     })
   );
 };
+
+//https://github.com/jaredhanson/passport
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
