@@ -11,10 +11,22 @@ module.exports = function(passport) {
         if (!user) {
           return done(null, false, { message: "No User Found" });
         }
-        if (!user.verifyPassword(password)) {
-          return done(null, false);
-        }
-        return done(null, user);
+        // if (!user.verifyPassword(password)) {
+        //   return done(null, false);
+        // }
+        // return done(null, user);
+
+        //https://github.com/kelektiv/node.bcrypt.js/#to-check-a-password
+        bcrypt.compare(password, user.password, function(err, isMatch) {
+          if (err) {
+            return done(err);
+          }
+          if (isMatch) {
+            return done(null, user);
+          } else {
+            return done(null, false);
+          }
+        });
       });
     })
   );
