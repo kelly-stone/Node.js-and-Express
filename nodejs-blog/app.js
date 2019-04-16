@@ -3,7 +3,8 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-var session = require("express-session");
+const session = require("express-session");
+const passport = require("passport");
 
 mongoose.connect("mongodb://localhost/nodejs-blog", { useNewUrlParser: true }); //to find out the localhost on command line type mongo then show db
 let db = mongoose.connection;
@@ -35,6 +36,10 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "public")));
+
+//https://github.com/jaredhanson/passport     middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 let Article = require("./models/article");
 
