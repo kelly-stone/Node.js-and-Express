@@ -1,6 +1,7 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator/check");
 const bcrypt = require("bcrypt"); //https://github.com/kelektiv/node.bcrypt.js/
+const passport = require("passport");
 
 let router = express.Router();
 
@@ -61,7 +62,7 @@ router.post(
               return;
             } else {
               req.flash("success", "You are now registered"); //密码成功加密
-              res.redirect("/");
+              res.redirect("/users/login");
             }
           });
         });
@@ -77,21 +78,12 @@ router.get("/login", function(req, res) {
 router.post("/login", function(req, res) {
   //https://github.com/jaredhanson/passport
   //http://www.passportjs.org/docs/authenticate/
+
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/users/login",
+    failureFlash: true
+  });
 });
-// passport.use(
-//   new LocalStrategy(function(username, password, done) {
-//     User.findOne({ username: username }, function(err, user) {
-//       if (err) {
-//         return done(err);
-//       }
-//       if (!user) {
-//         return done(null, false);
-//       }
-//       if (!user.verifyPassword(password)) {
-//         return done(null, false);
-//       }
-//       return done(null, user);
-//     });
-//   })
-// );
+
 module.exports = router;

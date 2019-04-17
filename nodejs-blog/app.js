@@ -37,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
+require("./config/passport")(passport);
 //https://github.com/jaredhanson/passport     middleware
 app.use(passport.initialize());
 app.use(passport.session());
