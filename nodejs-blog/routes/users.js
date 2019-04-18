@@ -75,7 +75,7 @@ router.get("/login", function(req, res) {
   res.render("users/login");
 });
 
-router.post("/login", function(req, res) {
+router.post("/login", function(req, res, next) {
   //https://github.com/jaredhanson/passport
   //http://www.passportjs.org/docs/authenticate/
 
@@ -83,7 +83,7 @@ router.post("/login", function(req, res) {
     successRedirect: "/",
     failureRedirect: "/users/login",
     failureFlash: true
-  });
+  })(req, res, next);
 });
 
 module.exports = router;
