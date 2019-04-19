@@ -5,8 +5,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const passport = require("passport");
+const config = require("./config/database");
 
-mongoose.connect("mongodb://localhost/nodejs-blog", { useNewUrlParser: true }); //to find out the localhost on command line type mongo then show db
+mongoose.connect(config.database, { useNewUrlParser: true }); //to find out the localhost on command line type mongo then show db
 let db = mongoose.connection;
 
 db.once("open", function() {
@@ -21,7 +22,7 @@ const app = express();
 
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: config.secret,
     resave: false,
     saveUninitialized: true
   })
