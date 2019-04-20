@@ -20,10 +20,14 @@ html(lang="en")
               a.nav-link(href='/articles/new') Add Article
 
           ul.navbar-nav.narbar-right
-            li.nav-item
-              a.nav-link(href='/users/register') Register
-            li.nav-item
-              a.nav-link(href='/users/login') Login
+            if user
+             li.nav-item
+              a.nav-link(href='/users/logout') Logout
+            else
+              li.nav-item
+                a.nav-link(href='/users/register') Register
+              li.nav-item
+                a.nav-link(href='/users/login') Login
 
     .container
       != messages('message', locals)
