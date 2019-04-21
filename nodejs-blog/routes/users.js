@@ -87,4 +87,10 @@ router.post("/login", function(req, res, next) {
   })(req, res, next);
 });
 
+router.get("/logout", function(req, res) {
+  //http://www.passportjs.org/docs/logout/
+  req.logout();
+  res.redirect("/users/login");
+});
+
 module.exports = router;
