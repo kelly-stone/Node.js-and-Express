@@ -91,7 +91,7 @@ router.get("/logout", function(req, res) {
   //http://www.passportjs.org/docs/logout/
   req.logout();
   req.flash("success", "You are logged out.");
-  res.redirect("/users/login");
+  res.redirect("/");
 });
 
 module.exports = router;
