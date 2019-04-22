@@ -49,10 +49,10 @@ router.post(
       .withMessage("Title is required"),
     check("body")
       .isLength({ min: 1 })
-      .withMessage("Body is required"),
-    check("author")
-      .isLength({ min: 1 })
-      .withMessage("Author is required")
+      .withMessage("Body is required")
+    // check("author")
+    //   .isLength({ min: 1 })
+    //   .withMessage("Author is required")
   ],
   function(req, res) {
     const errors = validationResult(req);
