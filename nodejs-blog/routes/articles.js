@@ -65,7 +65,7 @@ router.post(
     } else {
       let article = new Article(req.body);
 
-      article.author = req.user._id;
+      article.author = req.user.id;
 
       article.save(function(err) {
         if (err) {
