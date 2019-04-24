@@ -3,7 +3,7 @@ extends ../layout
 block content
   h1= article.title
   h5 Written by #{author}  
-  //- author: user.name
+  //- author: user.name  from routes/articles
   p= article.body
   hr
   a.btn.btn-primary.mr-2(href="/articles/" + article.id + "/edit") Edit
