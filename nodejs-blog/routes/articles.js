@@ -16,7 +16,6 @@ router.get("/", function(req, res) {
 
 router.get("/new", function(req, res) {
   res.render("articles/new", {
-    //form new.pug
     //new.pug
     title: "Add Article"
   });
@@ -24,10 +23,11 @@ router.get("/new", function(req, res) {
 
 router.get("/:id", function(req, res) {
   Article.findById(req.params.id, function(err, article) {
-    // console.log(article);
-    // return;
-    res.render("articles/show", {
-      article: article
+    User.findById(article.author, function(err, user) {
+      res.render("articles/show", {
+        article: article,
+        author: user.name
+      });
     });
   });
 });
