@@ -4,6 +4,7 @@ const { check, validationResult } = require("express-validator/check");
 let router = express.Router();
 
 let Article = require("../models/article");
+let User = require("../models/user");
 
 router.get("/", function(req, res) {
   Article.find({}, function(err, articles) {
