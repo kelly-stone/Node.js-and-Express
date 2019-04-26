@@ -107,4 +107,13 @@ router.delete("/:id", function(req, res) {
   });
 });
 
+function ensureAuthenticated(req, res, next) {
+  if ((req, ensureAuthenticated())) {
+    return next();
+  } else {
+    req.flash("danger", "Please login");
+    res.redirect("/users/login");
+  }
+}
+
 module.exports = router;
