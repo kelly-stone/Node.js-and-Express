@@ -33,7 +33,7 @@ router.get("/:id", function(req, res) {
   });
 });
 
-router.get("/:id/edit", function(req, res) {
+router.get("/:id/edit", ensureAuthenticated, function(req, res) {
   Article.findById(req.params.id, function(err, article) {
     res.render("articles/edit", {
       title: "Edit Article", //edit.pug #{title}
