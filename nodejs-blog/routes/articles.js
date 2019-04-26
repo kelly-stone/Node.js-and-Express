@@ -15,7 +15,7 @@ router.get("/", function(req, res) {
   });
 });
 
-router.get("/new", function(req, res) {
+router.get("/new", ensureAuthenticated, function(req, res) {
   res.render("articles/new", {
     //new.pug
     title: "Add Article"
@@ -108,12 +108,11 @@ router.delete("/:id", function(req, res) {
 });
 
 function ensureAuthenticated(req, res, next) {
-  if ((req, ensureAuthenticated())) {
+  if (req.isAuthenticated()) {
     return next();
   } else {
     req.flash("danger", "Please login");
     res.redirect("/users/login");
   }
 }
-
 module.exports = router;
