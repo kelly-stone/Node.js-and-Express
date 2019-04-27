@@ -2,6 +2,7 @@
 
 View engine, pug
 
+mongodb
 $brew install mongodb;
 $brew info mongodb;
 $brew services start mongodb;
